@@ -66,11 +66,12 @@ class MainHandler(tornado.web.RequestHandler):
 class MessageNewHandler(tornado.web.RequestHandler):
     """Post a new message to the chat room."""
     def post(self):
-        ip=hash(self.request.remote_ip) % 100000
-        ip=str(ip)
+        # Hash the IP address of the user, then take the last few digits of the hash to use as a unique ID.
+        ip = hash(self.request.remote_ip) % 100000
+        ip = str(ip)
         message = {"id": str(uuid.uuid4()), "body": self.get_argument("body")}
+        # Append the unique ID to the beginning of the message.
         message["body"] = "User" + ip + ": " + message["body"]
-        print(self.request.remote_ip)
         # render_string() returns a byte string, which is not supported
         # in json, so we must convert it to a character string.
         message["html"] = tornado.escape.to_unicode(
