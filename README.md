@@ -1,6 +1,7 @@
 # uwin-live
 
 1) Clone the repo to your machine.
+2) Make sure you have tornado installed: `pip3 install tornado`
 2) In a terminal, navigate to the repo and run the command `python3 chatdemo.py`
 3) In a browser, navigate to http://localhost:8888/.
 
