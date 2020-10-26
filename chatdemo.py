@@ -21,12 +21,12 @@ import tornado.locks
 import tornado.web
 import os.path
 import uuid
+import ipaddress
 
 from tornado.options import define, options, parse_command_line
 
 define("port", default=8888, help="run on the given port", type=int)
 define("debug", default=True, help="run in debug mode")
-
 
 class MessageBuffer(object):
     def __init__(self):
@@ -65,9 +65,12 @@ class MainHandler(tornado.web.RequestHandler):
 
 class MessageNewHandler(tornado.web.RequestHandler):
     """Post a new message to the chat room."""
-
     def post(self):
+        ip=hash(self.request.remote_ip) % 100000
+        ip=str(ip)
         message = {"id": str(uuid.uuid4()), "body": self.get_argument("body")}
+        message["body"] = "User" + ip + ": " + message["body"]
+        print(self.request.remote_ip)
         # render_string() returns a byte string, which is not supported
         # in json, so we must convert it to a character string.
         message["html"] = tornado.escape.to_unicode(
