@@ -1,0 +1,169 @@
+.headerDiv{
+    width: 100%;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 22;
+    text-align: center;
+    border-top-style: solid;
+    border-top-width: medium;
+    border-top-color: #696969;
+    border-bottom-style: solid;
+    border-bottom-width: medium;
+    border-bottom-color: #696969;
+    color: #202EC2;
+    background-color: #DFEBFF;  
+}
+
+/* container for flexboxes */ 
+.Container {
+    background-color: #F9F9F2;
+    width: 100%;
+    height: 100%;
+    display:flex;
+    justify-content: left;
+}
+
+.chatWindow{
+    display:flex;
+    flex-flow: column;
+    width:1500px; 
+    margin-left: 0px;
+    border-style: solid;
+    border-width: medium;
+    border-color: #696969;
+    border-top-style: none;
+    background-color: white;
+    width: 80%;
+}
+
+.chatText {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  max-height: 300px;
+  width: 97.5%;
+  padding: 10px;
+  margin: 10px 0;
+  float: left;
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+.blue {
+  border: 2px solid #dedede;
+  background-color: #AECAFD;
+}
+
+.chatText img{
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+  padding-bottom: 20px;
+}
+
+.chatText img.right{
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.chatText::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+  font-size: 12px;
+}
+
+.userMessage{
+    width: 76%;
+    position:relative;
+    align-content: center;
+    padding:inherit;
+    margin: .5em;
+}
+
+.typeBox{
+    text-align:left;
+    background-color: #BCD4FF;
+    width: 73%;
+    height: 6%;
+    border-radius : 4px;
+    position: fixed;
+    bottom: 100px;
+}
+
+.sendButton{
+    border-style: solid;
+    border-width: medium;
+    border-color: #696969;
+    border-left-style: none;
+    border-radius: 4px;
+    width: 6.25%;
+    height: 6%;
+    font-size: 16px;
+    position: fixed;
+    
+}
+
+input[type=text], select {
+  width: 100%;
+  height: 100%;
+  background-color: #BCD4FF;
+  padding: 12px 20px;
+  border: medium solid #696969;
+  border-radius: 4px;
+}
+
+.repID{
+    border-style: solid;
+    border-width: medium;
+    border-color: #696969;
+    border-radius: 8px;
+    width: 200px;
+    height: 250px;
+    position: fixed;
+    top: 123px;
+    right: 2.5%;
+    background-color: white;
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+    text-align: center;
+    flex-direction: column;
+}
+
+.repID img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer{
+    width: 100%;
+    height: 90px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+    border-top-style: solid;
+    border-top-width: medium;
+    border-top-color: #696969;
+    border-bottom-style: solid;
+    border-bottom-width: medium;
+    border-bottom-color: #696969;
+    color: #202EC2;
+    background-color: #DFEBFF; 
+    position: fixed;
+    bottom: 0px;
+    padding-top: 10px;
+}
+
