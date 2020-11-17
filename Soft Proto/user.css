@@ -1,0 +1,145 @@
+/* Stylesheet*/
+
+:root {
+
+    background-color: lemonchiffon;
+    
+}
+
+body{
+    font-family: lucida grande ,tahoma,verdana,arial,sans-serif;
+    
+}
+h1{
+    text-align: center;
+}
+/*wrapping the entire content from highest border to lowest border*/
+#wrapper
+{
+    display: flex;
+    position:relative;
+    flex-direction: column;
+    align-items:center;
+
+    width: 1680px;
+    height: 100%;
+    background-color:lightblue;
+    margin: 0 auto;
+    padding: 0;
+    border: 5px solid red;
+}
+/*Top banner for title*/
+#banner{
+    background-color: royalblue;
+    width:100%;
+    height:100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    
+}
+#banner-center{
+    border:solid 2px;
+    border-width: 10px;
+    border-color: wheat;
+    
+}
+
+#banner-center h1{
+    text-decoration: underline;
+    margin-bottom:auto;
+    
+}
+#banner-center h3{
+    text-align: center;
+    
+}
+/* main holds the main chat window */
+main{
+    display:flex;
+    flex-flow: column;
+    width:1450px; 
+    margin-left: -12.5em;
+    border: solid 4px;
+
+}
+/*code for chat messages */
+.chat-box {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.chat-box::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.chat-box img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.chat-box img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+
+.chat-message {
+    position:relative;
+    align-content: center;
+    padding:inherit;
+    margin: .5em;
+    
+}
+/* holds the right sidebar consisting of rep and chat history info */
+#sidebar-right{
+    position:absolute;
+       top: 160px;
+       right: -.1em;
+       overflow: hidden;
+       transition: all .3s ease-in;
+       width: 14em;
+       height: 100%;
+    border: solid 2 px
+}
+
+#sidebar-right ul{
+    float:right;
+    list-style: none;
+    margin:0;
+    
+}
+
+figcaption{
+    background-color: black;
+    color: white;
+    margin-right: .5em;
+    font-style: italic;
+    padding: 2px;
+    text-align: center;
+}
+
+
+
