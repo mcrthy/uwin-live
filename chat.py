@@ -25,7 +25,7 @@ import ipaddress
 
 from tornado.options import define, options, parse_command_line
 
-define("port", default=8888, help="run on the given port", type=int)
+define("port", default=8001, help="run on the given port", type=int)
 define("debug", default=True, help="run in debug mode")
 
 class MessageBuffer(object):
@@ -60,16 +60,21 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html", messages=global_message_buffer.cache)
 
+class NewIdHandler(tornado.web.RequestHandler):
+    """Generates a unique user ID based on user's uWindsor email and IP address"""
+    def post(self):
+        email_tag = self.get_argument("body").split("@")[0]
+        ip_tag = str(hash(self.request.remote_ip) % 1000)
+        username = email_tag + '#' + ip_tag
+
+        message = {"body": username}
+        self.write(message)
 
 class MessageNewHandler(tornado.web.RequestHandler):
     """Post a new message to the chat room."""
     def post(self):
         # Hash the IP address of the user, then take the last few digits of the hash to use as a unique ID.
-        ip = hash(self.request.remote_ip) % 100000
-        ip = str(ip)
         message = {"id": str(uuid.uuid4()), "body": self.get_argument("body")}
-        # Append the unique ID to the beginning of the message.
-        message["body"] = "User" + ip + ": " + message["body"]
         # render_string() returns a byte string, which is not supported
         # in json, so we must convert it to a character string.
         message["html"] = tornado.escape.to_unicode(
@@ -114,10 +119,11 @@ def main():
             (r"/", MainHandler),
             (r"/a/message/new", MessageNewHandler),
             (r"/a/message/updates", MessageUpdatesHandler),
+            (r"/a/id", NewIdHandler),
         ],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static"),
-        xsrf_cookies=True,
+        xsrf_cookies=False,
         debug=options.debug,
     )
     app.listen(options.port)

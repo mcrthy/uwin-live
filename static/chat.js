@@ -9,14 +9,17 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 // WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-// License for the specific language governing permissions and limitations
-// under the License.
 
 $(document).ready(function() {
     if (!window.console) window.console = {};
     if (!window.console.log) window.console.log = function() {};
 
+    if (!window.localStorage.getItem("username")) {
+        createId();
+    }
+
     $("#messageform").on("submit", function() {
+        console.log("input sent");
         newMessage($(this));
         return false;
     });
@@ -28,15 +31,29 @@ $(document).ready(function() {
         return true;
     });
     $("#message").select();
-    updater.poll();
+    window.setInterval(updater.poll(),);
 });
+
+function createId() {
+    var name = prompt("Please enter your uWindsor email.");
+    if (name != null) {
+        $.postJSON("/a/id", {body: name}, function(response) {
+            window.localStorage.setItem("username", response.body);
+        });
+    }
+}
 
 function newMessage(form) {
     var message = form.formToDict();
+
+    username = window.localStorage.getItem("username");
+    message.body = username + ": " + message.body;
+    
     var disabled = form.find("input[type=submit]");
     disabled.disable();
     $.postJSON("/a/message/new", message, function(response) {
-        updater.showMessage(response);
+        console.log("response:", response);
+        updater.showMessage(message.body, response);
         if (message.id) {
             form.parent().remove();
         } else {
