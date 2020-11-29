@@ -22,6 +22,7 @@ import tornado.web
 import os.path
 import uuid
 import ipaddress
+from lib import rand_int, get_email_prefix
 
 from tornado.options import define, options, parse_command_line
 
@@ -63,9 +64,13 @@ class MainHandler(tornado.web.RequestHandler):
 class NewIdHandler(tornado.web.RequestHandler):
     """Generates a unique user ID based on user's uWindsor email and IP address"""
     def post(self):
-        email_tag = self.get_argument("body").split("@")[0]
-        ip_tag = str(hash(self.request.remote_ip) % 1000)
-        username = email_tag + '#' + ip_tag
+        email = self.get_argument("body")
+        email_prefix = get_email_prefix(email)
+
+        hashed_ip = rand_int(self.request.remote_ip)
+        ip_tag = str(hashed_ip)
+
+        username = email_prefix + '#' + ip_tag
 
         message = {"body": username}
         self.write(message)
