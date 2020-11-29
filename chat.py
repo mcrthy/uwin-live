@@ -26,7 +26,7 @@ from lib import rand_int, get_email_prefix
 
 from tornado.options import define, options, parse_command_line
 
-define("port", default=8001, help="run on the given port", type=int)
+define("port", default=8005, help="run on the given port", type=int)
 define("debug", default=True, help="run in debug mode")
 
 class MessageBuffer(object):
